@@ -1,0 +1,270 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode} 
+\newcommand{\anonsection}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+\usepackage{fancyhdr}
+\setcounter{page}{148}
+
+%---enable russian----
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+
+% PROBABILITY SYMBOLS
+\newcommand*\PROB\Pr 
+\DeclareMathOperator*{\EXPECT}{\mathbb{E}}
+
+
+% Sets, Rngs, ets 
+\newcommand{\N}{{{\mathbb N}}}
+\newcommand{\Z}{{{\mathbb Z}}}
+\newcommand{\R}{{{\mathbb R}}}
+\newcommand{\Zp}{\ints_p} % Integers modulo p
+\newcommand{\Zq}{\ints_q} % Integers modulo q
+\newcommand{\Zn}{\ints_N} % Integers modulo N
+
+% Landau 
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand*{\OLandau}{\bigO}
+\newcommand*{\WLandau}{\Omega}
+\newcommand*{\xOLandau}{\widetilde{\OLandau}}
+\newcommand*{\xWLandau}{\widetilde{\WLandau}}
+\newcommand*{\TLandau}{\Theta}
+\newcommand*{\xTLandau}{\widetilde{\TLandau}}
+\newcommand{\smallo}{o} %technically, an omicron
+\newcommand{\softO}{\widetilde{\bigO}}
+\newcommand{\wLandau}{\omega}
+\newcommand{\negl}{\mathrm{negl}} 
+
+% Misc
+\newcommand{\eps}{\varepsilon}
+\newcommand{\inprod}[1]{\left\langle #1 \right\rangle}
+
+ 
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf Научно-исследовательская практика} \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{Эйлерово обобщение теоремы Ферма #1}}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{definition}{Определение}
+\newtheorem{corollary}{Следствие}
+\newtheorem{fact}{Факт}
+
+% 1-inch margins
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 1.5ex
+
+\begin{document}
+
+\lecture{}{Лето 2020}{}{Юрий Шаманов}
+
+	\pagestyle{fancy}
+\rhead{CHAP. 7}
+\chead{Эйлерово обобщение теоремы Ферма}
+\lhead{\thepage}
+
+
+$8$. Учитывая, что \textit{n} $\geq$ 1, набор \textit{$\phi(n)$} целых чисел, которые взаимно протые и которые являются несогласованными по модулю \textit{n}, \textit{называются уменьшенным набором остатков по модулю n} (то есть по уменьшенным набором остатков явдяются те члены полного набора остатков по модулю \textit{n}, которые относительно просты по модулю \textit{n}).
+
+Убедитесть, что
+
+\begin{enumerate}
+	\begin{enumerate}
+		
+		\item целые чилса $-31, -16, -8, 13, 25, 80$ формируют уменьшенныйнабор остатков по модулю $9$;
+		
+		\item  целые чилса $3, 3^{2}, 3^{3}, 3^{4}, 3^{5}, 3^{6}$ формируют уменьшенный набор остатков по модулю $14$;
+
+		\item  целые чилса $2, 2^{2}, 2^{3}, \ldots, 2^{18}$  формируют уменьшенный набор остатков по модулю $27$;
+	\end{enumerate}
+\end{enumerate}
+
+$9$. Если \textit{p} –  простое число, покажите, что целые числа
+
+\[
+-\frac{\textit{p}-1}{2} , \ldots , -2, -1, 1, 2, \ldots , \frac{\textit{p}-1}{2}
+\]
+
+формируют уменьшенный набор остатков по модулю \textit{p};
+
+\anonsection{
+	\begin{flushleft}
+		7.4 Некоторые свойства \\ функции Эйлера	
+	\end{flushleft}
+} 
+
+Следующая теорема указываепт на любопытную особенность функции Эйлера, а именно, что сумма значений \textit{$\phi(d)$}, где \textit{d} — положителоьный делитель \textit{n}, равсна самой \textit{n}. Впервые это заметил Гаус.
+
+%Теорема $7-6$ (Гаусc) \textit{для положительного целового числа  n} $\geq$ 1,
+Теорема $7-6$  \begin{theorem}
+	(Гаусc) для положительного целового числа  n $\geq$ 1,
+	
+
+\[
+n = \sum_{d|n}\phi(d),
+\]
+
+\textit{сумма распространяется на все положительные делители n}.
+\end{theorem}
+
+\textit{Доказательство}: целы числа от $1$ до n можно разделить на классы следующим образом: если d – положительный делитель n, то мы помещаем целое число m в класс Sd при условии, что НОД(m,n) = d.
+
+\[
+S_{d} = \left\{m | \gcd(m, n) = d; 1 \leq m \leq n\right\}.	
+\]
+
+
+Теперь НОД(\textit{m, n}) = \textit{d} тогда и только тогда, если  НОД(\textit{m/d, n/d}) = $1$. Таким образом, количесво целых чисел в классе равно количесву положительных чисел, не превышающих  n/d и взаимно просты с n/d; другими словами, равно $\phi(n)$. Так как каждое из n положительных чисел в множестве $\left\{1, 2, … , n\right\}$ лежит ровно в одном классе S$_d$, мы получаем формулу
+
+\[
+n = \sum_{d|n}\phi(n/d)
+\]
+
+
+Но так \textit{d} проходит все положительные делители \textit{n} как и \textit{n/d}; следовательно, 
+
+\[
+\sum_{d|n}\phi(\textit{n/d}) = \sum_{d|n}\phi(\textit{d})
+\]
+
+далее следует теорема.
+
+\begin{flushleft}
+	\textbf{Пример $7-3$}
+\end{flushleft}
+
+
+Простой числовой пример того, что мы только что сказали, приведен при \textit{n} = $10$. Здесь классы такие:
+
+\begin{center}
+
+	 S$_1$  = $\left\{1, 3, 7, 9\right\}$,\\
+	
+	 S$_2$ = $\left\{2, 4, 6, 8\right\}$,\\
+	
+	 S$_5$ = $\left\{5\right\}$,\\
+	
+	 S$_{10}$ = $\left\{10\right\}$.
+	
+\end{center}				
+
+
+Они содержат $\phi(10) = 4, \phi(5) = 4, \phi(2) = 1, \phi(1) = 1$ целых числех. Следовательно, 
+
+\[
+	\sum_{d|10}\phi(\textit{d}) = \phi(10) + \phi(5) + \phi(2) + \phi(1) = 4 + 4 + 1 + 1 = 10
+\]
+
+Поучительно привести второе доказательство теоремы $7-6$, на этот раз в зависимости от того, что  $\phi$ — мультипликативна. Подробнее: если \textit{n} = $1$,  тогда все ясно 
+
+\[
+\sum_{d|n}\phi(n/d) = \sum_{d|1}\phi(d) = \phi(1) = 1 = \textit{n}
+\]
+
+Предположим, что $n \geq 1$, рассмотрим теоретически-числовую фунцкцию
+
+\[
+F(n) = \sum_{d|n}\phi(d)
+\]
+
+Поскольку $\phi$ — мультипликативная функция , тогда по теореме $6-4$ F – мультипликативна. Следовательно, если $n = p_1^{k_{1}}p_2^{k_{2}} \ldots p_r^{k_{r}}$  является главной факторизации n, тогда 
+
+\[
+F(n) = F(p_1^{k_{1}})F(p_2^{k_{2}})\ldots F(p_r^{k_{r}})
+\]
+
+Для каждого значения i,
+
+$
+F(p_i^{k_{i}}) = \sum_{d|p_i^{k_{i}}}\phi(d)
+$
+	
+
+
+\begin{align*}
+	& = \phi(1) + \phi(p_i) + \phi(p_i^2) + \phi(p_i^3)+ \ldots + \phi(p_i^{k_{i}}) \\
+	& = 1 + (p_i – 1) + (p_i^2  - p_i) + (p_i^3  - p_i^2 ) + \ldots + (p_i^{k_{i}}  - p_i^{k_{i} - 1}) \\
+	& = p_i^{k_{i}},
+\end{align*}
+
+термины в приведенном выше выражении исключают друг друга, за исключением термина  $p_i^{k_{i}}$. Зная это, мы в конечном итоге получаем
+
+\[
+	F(n) = p_1^{k_{1}}p_2^{k_{2}}\ldots p_r^{k_{r}} = \textit{n}
+\]
+
+и так же 
+
+\[
+	n = \sum_{d|n}\phi(d)
+\]
+
+Отметим так же, что есть еще одино интересное тождество, которое включает в себя вункцию Эйлера.
+
+\begin{theorem}
+	Для  n > $1$, сумма положительных целых чисел меньше n и взаимно простых с n, это
+	 $\frac{1}{2}n\phi(n)$,
+
+\[
+	\frac{1}{2}n\phi(n) = \sum\limits_{\begin{split} \gcd(k,& n) = 1\\ 1 \leq k& < n\end{split}}k.
+\]
+\end{theorem}
+
+\textit{Доказательство:} пусть \textit{ а$_1$, а$_2$, … , а$_{\phi(n)}$}  положительные целые числа меньше \textit{n} и взаимно простые с n. Теперь НОД(a, n) = $1$ тогда и только тогда НОД(\textit{n - a, n}) = $1$, тогда мы имеем 
+
+\begin{align*}
+a_1  + a_2 +  \ldots  + a_{\phi(n)} & = (n - a_1) + (n - a_2) + \ldots + (n - a_{\phi(n)}) \\
+& = \phi(n)n - (a_1  + a_2 + \ldots  + a_{\phi(n)}).
+\end{align*}
+
+Следовательно, 
+
+\[
+2( a_1 + a_2 + \ldots + a_{\phi(n)} )= \phi(n) n
+\]
+
+
+подводя к заявленному выводу.
+
+\begin{flushleft}
+	\textbf{Пример $7-4$}
+\end{flushleft}
+
+
+
+Рассмотрим случай \textit{n} = $30$. $\phi(30)$ = $8$ целых чисел, которые меньше $30$ и взаимно простые с ним
+
+\begin{center}
+	$1, 7, 11, 13, 17, 19, 23, 29$.
+\end{center}
+
+
+
+
+
+\end{document}
